@@ -44,19 +44,19 @@ export function checkLogin() {
   ) {
     localStorage.removeItem('log');
     const arr = location.pathname.split('/');
-    location.pathname = `/${arr[0]}/login.html`;
+    location.pathname = `/${arr[1]}/login.html`;
   }
 }
 
 export function onBack() {
   const arr = location.pathname.split('/');
-  location.pathname = `/${arr[0]}`;
+  location.pathname = `/${arr[1]}`;
 }
 
 export function logOut() {
   localStorage.removeItem('log');
   const arr = location.pathname.split('/');
-  location.pathname = `/${arr[0]}/login.html`;
+  location.pathname = `/${arr[1]}/login.html`;
 }
 
 export function getName() {
