@@ -42,7 +42,6 @@ export async function checkList() {
   const db = getFirestore(app);
   onSnapshot(doc(db, 'list', 'Oi4nFSVsaGY2GQtak5IO'), doc => {
     const data = doc.data().items.reverse();
-    console.log(data);
   });
 }
 
@@ -97,7 +96,6 @@ export async function checkDefaultList() {
   const db = getFirestore(app);
   onSnapshot(doc(db, 'list', 'Default'), doc => {
     const data = doc.data().items.reverse();
-    console.log(data);
     renderStepsList(data);
   });
 }

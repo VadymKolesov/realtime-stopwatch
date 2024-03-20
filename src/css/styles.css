@@ -602,12 +602,39 @@ nav button {
   gap: 15px;
 }
 
+.indicator-wrap {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .room-indicator {
   width: 14px;
   height: 14px;
   border-radius: 50%;
   background-color: #40c900;
   box-shadow: rgba(0, 223, 0, 0.3) 0px 0px 0px 5px;
+  animation: animateIndicator 1500ms ease-in-out infinite;
+}
+
+@keyframes animateIndicator {
+  0% {
+    width: 14px;
+    height: 14px;
+    box-shadow: rgba(0, 223, 0, 0.3) 0px 0px 0px 5px;
+  }
+  50% {
+    width: 12px;
+    height: 12px;
+    box-shadow: rgba(0, 223, 0, 0.3) 0px 0px 0px 3px;
+  }
+  100% {
+    width: 14px;
+    height: 14px;
+    box-shadow: rgba(0, 223, 0, 0.3) 0px 0px 0px 5px;
+  }
 }
 
 /* LOGIN */
