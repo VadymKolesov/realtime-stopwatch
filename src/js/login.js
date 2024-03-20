@@ -39,7 +39,7 @@ async function onLogin(e) {
       'log',
       JSON.stringify({ ...userData, logIn: Date.now() })
     );
-    arr = location.pathname.split('/');
+    const arr = location.pathname.split('/');
     location.pathname = `/${arr[0]}`;
   }
 }

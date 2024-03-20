@@ -43,19 +43,19 @@ export function checkLogin() {
     Date.now() - JSON.parse(localStorage.getItem('log')).logIn > 86400000
   ) {
     localStorage.removeItem('log');
-    arr = location.pathname.split('/');
+    const arr = location.pathname.split('/');
     location.pathname = `/${arr[0]}/login.html`;
   }
 }
 
 export function onBack() {
-  arr = location.pathname.split('/');
+  const arr = location.pathname.split('/');
   location.pathname = `/${arr[0]}`;
 }
 
 export function logOut() {
   localStorage.removeItem('log');
-  arr = location.pathname.split('/');
+  const arr = location.pathname.split('/');
   location.pathname = `/${arr[0]}/login.html`;
 }
 
