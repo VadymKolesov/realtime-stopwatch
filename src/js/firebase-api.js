@@ -15,6 +15,7 @@ import { manageBtns, manageBtnsDefault } from './manage-btns';
 import { manageWatchInterval } from './watch';
 import { showUsers } from './manage-users';
 import { renderStepsList } from './render-steps-list';
+import { removeIndicatorBusy, setIndicatorBusy } from './utilites';
 
 export async function getFirebaseData() {
   const dbRef = ref(getDatabase());
@@ -153,4 +154,48 @@ export async function getUsers() {
   const docRef = doc(db, 'users', 'tokens');
   const data = await getDoc(docRef);
   return data.data().data;
+}
+
+export async function setIsBusy(docName, object) {
+  const docRef = await setDoc(doc(db, 'online', docName), {
+    item: object,
+  });
+}
+
+export async function getIsBusy(docName) {
+  const docRef = doc(db, 'online', docName);
+  const data = await getDoc(docRef);
+  return data.data().item;
+}
+
+export async function checkIsBusy(docName) {
+  const data = await getIsBusy(docName);
+  const timeNow = Date.now();
+
+  if (timeNow - data.lastTime < 30000) {
+    setIndicatorBusy(docName, data.user);
+    return;
+  } else {
+    const object = {
+      ...data,
+      user: '',
+      isBusy: false,
+    };
+    setIsBusy(docName, object);
+    removeIndicatorBusy(docName);
+  }
+}
+
+export async function checkUser(docName) {
+  const data = await getIsBusy(docName);
+
+  const localUser = JSON.parse(localStorage.getItem('log')).user;
+  const dataUser = data.user;
+
+  if (data.isBusy && localUser !== dataUser) {
+    const arr = location.pathname.split('/');
+    location.pathname = `/${arr[1]}`;
+  }
+
+  return;
 }

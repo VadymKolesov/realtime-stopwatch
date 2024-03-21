@@ -8,6 +8,21 @@ import { onErrorToast } from './utilites';
 checkLogin();
 checkTask();
 
+FirebaseApi.checkIsBusy('default_stopwatch_1');
+FirebaseApi.checkUser('default_stopwatch_1');
+
+setInterval(() => {
+  const user = JSON.parse(localStorage.getItem('log')).user;
+
+  FirebaseApi.setIsBusy('default_stopwatch_1', {
+    lastTime: Date.now(),
+    user: user,
+    isBusy: true,
+  });
+}, 5000);
+
+FirebaseApi.checkIsBusy('default_stopwatch_1');
+
 refs.backBtn.addEventListener('click', onBack);
 refs.logOutBtn.addEventListener('click', logOut);
 refs.startBtn.addEventListener('click', onStart);

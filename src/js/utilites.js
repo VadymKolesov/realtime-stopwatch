@@ -1,6 +1,7 @@
 import warningIcon from '../img/warning.svg';
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
+import { getIsBusy } from './firebase-api';
 
 export const convertMs = ms => {
   const sec = 1000;
@@ -90,4 +91,32 @@ export function onErrorToast(message, link) {
         'linear-gradient(170deg,rgba(255, 255, 255, 1) 0%,rgba(245, 245, 245, 1) 100%)',
     },
   }).showToast();
+}
+
+export async function setIndicatorBusy(id, user) {
+  if (document.getElementById(id)) {
+    document.getElementById(id).classList.remove('isNotBusy');
+    document.getElementById(id).classList.add('isBusy');
+    document
+      .getElementById(id)
+      .parentElement.parentElement.firstElementChild.insertAdjacentHTML(
+        'beforeend',
+        `<p class="user-busy-link">${user}</p>`
+      );
+    document.getElementById(
+      id
+    ).parentElement.parentElement.style.pointerEvents = 'none';
+  }
+  return;
+}
+
+export function removeIndicatorBusy(id) {
+  if (document.getElementById(id)) {
+    document.getElementById(id).classList.add('isNotBusy');
+    document.getElementById(id).classList.remove('isBusy');
+    document.getElementById(
+      id
+    ).parentElement.parentElement.style.pointerEvents = 'all';
+  }
+  return;
 }

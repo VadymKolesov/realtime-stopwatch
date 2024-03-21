@@ -1,6 +1,8 @@
 import { refs } from './js/refs';
-import { checkLogin, logOut, onBack } from './js/utilites';
+import { checkLogin, logOut } from './js/utilites';
+import { checkIsBusy } from './js/firebase-api';
 
+checkIsBusy('default_stopwatch_1');
 checkLogin();
 
 refs.logOutBtn.addEventListener('click', logOut);

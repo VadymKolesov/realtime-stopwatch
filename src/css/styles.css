@@ -591,15 +591,29 @@ nav button {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
-.room-item a {
+.room-link {
   width: 100%;
-  padding: 20px;
+  padding: 20px 30px;
   color: var(--black);
-  text-align: center;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  gap: 15px;
+}
+
+.lobby-watch-name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.user-busy-link {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.room-link div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .indicator-wrap {
@@ -611,29 +625,37 @@ nav button {
 }
 
 .room-indicator {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
+  animation: animateIndicator 1000ms ease-in-out infinite;
+}
+
+.isBusy {
+  background-color: #de0000;
+  box-shadow: rgba(223, 0, 0, 0.3) 0px 0px 0px 5px;
+}
+
+.isNotBusy {
   background-color: #40c900;
   box-shadow: rgba(0, 223, 0, 0.3) 0px 0px 0px 5px;
-  animation: animateIndicator 1500ms ease-in-out infinite;
 }
 
 @keyframes animateIndicator {
   0% {
-    width: 14px;
-    height: 14px;
-    box-shadow: rgba(0, 223, 0, 0.3) 0px 0px 0px 5px;
+    width: 16px;
+    height: 16px;
+    box-shadow: inherit 0px 0px 0px 5px;
   }
   50% {
     width: 12px;
     height: 12px;
-    box-shadow: rgba(0, 223, 0, 0.3) 0px 0px 0px 3px;
+    box-shadow: inherit 0px 0px 0px 3px;
   }
   100% {
-    width: 14px;
-    height: 14px;
-    box-shadow: rgba(0, 223, 0, 0.3) 0px 0px 0px 5px;
+    width: 16px;
+    height: 16px;
+    box-shadow: inherit 0px 0px 0px 5px;
   }
 }
 
