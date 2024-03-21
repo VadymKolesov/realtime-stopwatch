@@ -12,7 +12,13 @@ FirebaseApi.checkIsBusy('default_stopwatch_1');
 FirebaseApi.checkUser('default_stopwatch_1');
 
 setInterval(() => {
+  const data = FirebaseApi.getIsBusy();
   const user = JSON.parse(localStorage.getItem('log')).user;
+
+  if (data.user !== localUser) {
+    location.reload();
+    return;
+  }
 
   FirebaseApi.setIsBusy('default_stopwatch_1', {
     lastTime: Date.now(),
