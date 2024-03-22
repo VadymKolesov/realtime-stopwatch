@@ -1,8 +1,8 @@
 {
   "name": "Realtime Stopwatch",
-  "short_name": "Realtime Stopwatch",
+  "short_name": "Stopwatch",
   "start_url": "/realtime-stopwatch/index.html",
-  "display": "standalone",
+  "display": "fullscreen",
   "background_color": "#fff",
   "theme_color": "#fff",
   "orientation": "portrait-primary",
