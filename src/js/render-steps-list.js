@@ -12,6 +12,7 @@ export const renderStepsList = data => {
     .map(
       el => `
     <li class="step-item">
+    <div>
     <div class="step-time-item">
         <div>
           <p class="step">Step ${el.step}</p>
@@ -19,12 +20,13 @@ export const renderStepsList = data => {
         convertMs(el.time).secunds
       },${convertMs(el.time).milisecunds}</p>
         </div>
-        <button id="${el.id}" type="button" class="delete-btn">Delete</button>
     </div>
     <div class="step-description">
       <p class="step-user">${el.user}</p>
       <p class="step-task">Task: ${el.task}</p>
     </div>
+    </div>
+    <button id="${el.id}" type="button" class="delete-btn">Delete</button>
     </li>
   `
     )

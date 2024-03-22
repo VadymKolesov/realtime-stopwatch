@@ -135,9 +135,7 @@ button {
 }
 
 .section-timer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
 }
 
 .timer-wrap {
@@ -322,13 +320,15 @@ button {
 /* STEPS */
 
 .section-list {
+  width: 100%;
   display: flex;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
   margin-bottom: 50px;
 }
 
 .steps-list {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -336,10 +336,8 @@ button {
 }
 
 .step-item {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  width: 350px;
+  position: relative;
+  width: 100%;
   min-height: 150px;
   background-color: var(--white);
   padding: 30px 30px;
@@ -348,9 +346,10 @@ button {
   overflow: hidden;
 }
 
-.step-time-item {
+.step-item > div {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .step {
@@ -382,8 +381,11 @@ button {
 }
 
 .delete-btn {
+  position: absolute;
+  top: 30px;
+  right: 30px;
   background-color: rgb(230, 14, 14);
-  padding: 0 30px;
+  padding: 19px 30px;
   font-size: 14px;
   line-height: 1;
 }
@@ -581,8 +583,7 @@ button {
 header {
   display: flex;
   flex-direction: column;
-  width: 350px;
-  margin: 0 auto;
+  width: 100%;
 }
 
 nav {
@@ -631,7 +632,7 @@ nav button {
 /* ROOMS */
 
 .rooms-list {
-  max-width: 350px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -784,4 +785,106 @@ nav button {
 
 .login-input-required {
   border: 1px solid rgb(230, 14, 14);
+}
+
+/* MEDIA */
+
+@media screen and (min-width: 768px) {
+  .container {
+    padding: 0 100px;
+  }
+
+  .nav-name {
+    font-size: 18px;
+  }
+
+  .username {
+    font-size: 32px;
+  }
+
+  .task-description {
+    font-weight: 300;
+    font-size: 18px;
+  }
+
+  .timer-wrap {
+    padding: 80px 40px 50px 40px;
+  }
+
+  .timer-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .timer-buttons button {
+    padding: 30px 0;
+  }
+
+  .step-item {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .step-item > div {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+
+  .step-time-item {
+    flex-direction: column;
+    text-align: right;
+  }
+
+  .step-time-item > div {
+    min-width: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .delete-btn {
+    position: static;
+    width: 100%;
+    padding: 30px 0;
+  }
+
+  .step {
+    font-size: 24px;
+    margin: 0;
+  }
+
+  .time {
+    font-size: 18px;
+  }
+
+  .step-user {
+    font-size: 24px;
+  }
+
+  .step-task {
+    font-size: 16px;
+  }
+
+  .step-description {
+    gap: 10px;
+  }
+
+  .list-btns {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .list-btns button {
+    padding: 30px 0;
+    width: 100%;
+  }
+
+  .room-link {
+    padding: 30px 30px;
+  }
+
+  nav {
+    padding: 30px 0;
+  }
 }
