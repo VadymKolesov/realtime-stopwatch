@@ -11,6 +11,7 @@ export const refs = {
   resetBtn: document.querySelector('.reset-btn'),
   sendBtn: document.querySelector('.send-btn'),
   resetBackdrop: document.querySelector('.reset-backdrop'),
+  resetModal: document.querySelector('.reset-modal'),
   sendBackdrop: document.querySelector('.send-backdrop'),
   noBtn: document.querySelector('.no-btn'),
   yesBtn: document.querySelector('.yes-btn'),

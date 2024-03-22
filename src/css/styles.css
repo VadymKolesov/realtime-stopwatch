@@ -48,7 +48,10 @@ input[type='number']::-webkit-inner-spin-button {
 }
 
 .visually-hidden {
-  position: absolute;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  /* position: absolute;
   width: 1px;
   height: 1px;
   margin: -1px;
@@ -59,7 +62,7 @@ input[type='number']::-webkit-inner-spin-button {
   clip: rect(0 0 0 0);
   overflow: hidden;
   background-color: rgba(255, 255, 255, 0);
-  transition: background-color 300ms ease-in-out;
+  transition: background-color 300ms ease-in-out; */
 }
 
 a {
@@ -293,40 +296,59 @@ button {
 .steps-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
   margin-top: 40px;
 }
 
 .step-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 30px;
   width: 350px;
+  min-height: 150px;
   background-color: var(--white);
-  padding: 20px 30px;
+  padding: 30px 30px;
   border-radius: 15px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   overflow: hidden;
 }
 
-.step-item div {
+.step-time-item {
   display: flex;
-  flex-direction: column;
-  gap: 3px;
+  justify-content: space-between;
 }
 
 .step {
   font-weight: 500;
+  font-size: 20px;
+  margin-bottom: 3px;
 }
 
 .time {
   font-weight: 300;
+  font-size: 16px;
+}
+
+.step-description {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.step-user {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.step-task {
   font-size: 14px;
+  font-weight: 300;
 }
 
 .delete-btn {
   background-color: rgb(230, 14, 14);
-  padding: 15px 20px;
+  padding: 0 30px;
   font-size: 14px;
   line-height: 1;
 }
@@ -373,7 +395,7 @@ button {
   justify-content: center;
   align-items: center;
   text-align: center;
-  transition: background-color 300ms ease-in-out;
+  transition: all 200ms ease-in-out;
 }
 
 .done-message {
@@ -484,15 +506,21 @@ button {
 
 .task-form {
   width: 100%;
+  max-height: 150px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 15px;
   margin-top: 30px;
+  opacity: 1;
+  overflow: hidden;
+  transition: all 200ms ease-in-out;
 }
 
 .task-form-hidden {
-  display: none;
+  margin-top: 0;
+  max-height: 0;
+  opacity: 0;
 }
 
 .task-input {
