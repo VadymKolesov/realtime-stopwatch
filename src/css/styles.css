@@ -733,12 +733,35 @@ nav button {
 }
 
 .login-label {
+  opacity: 0;
   font-size: 40px;
   font-weight: 700;
   margin-bottom: 30px;
+  animation: loginLabelAnimation 500ms ease-in-out 300ms forwards;
+}
+
+@keyframes loginLabelAnimation {
+  0% {
+    opacity: 0;
+    transform: translate(0, 10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes loginFormAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .login-input {
+  opacity: 0;
   width: 100%;
   padding: 20px 20px;
   font-size: 16px;
@@ -746,14 +769,17 @@ nav button {
   border-radius: 15px;
   border: 1px solid rgba(99, 99, 99, 0.3);
   transition: border 200ms ease-in-out;
+  animation: loginFormAnimation 500ms ease-in-out 800ms forwards;
 }
 
 .login-btn {
+  opacity: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
   height: 61px;
+  animation: loginFormAnimation 500ms ease-in-out 800ms forwards;
 }
 
 .login-input-required {
