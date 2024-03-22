@@ -21,12 +21,12 @@
     <title>Page 3</title>
     <script type="module" crossorigin src="/realtime-stopwatch/commonHelpers.js"></script>
     <link rel="modulepreload" crossorigin href="/realtime-stopwatch/assets/vendor-451a0b16.js">
-    <link rel="modulepreload" crossorigin href="/realtime-stopwatch/assets/firebase-api-409b349f.js">
-    <link rel="stylesheet" href="/realtime-stopwatch/assets/firebase-api-d6ef23fb.css">
+    <link rel="modulepreload" crossorigin href="/realtime-stopwatch/assets/firebase-api-a01a59e8.js">
+    <link rel="stylesheet" href="/realtime-stopwatch/assets/firebase-api-3f2d7b43.css">
     <link rel="stylesheet" href="/realtime-stopwatch/assets/vendor-cc075105.css">
   </head>
   <body>
-    <header>
+    <header class="container">
       <nav>
         <button type="button" class="back-btn">
           <img src="/realtime-stopwatch/assets/arrow-left-0f365f85.svg" />
@@ -53,8 +53,8 @@
         </form>
       </div>
     </header>
-    <main>
-      <section class="section-timer container">
+    <main class="container">
+      <section class="section-timer">
         <div class="timer-wrap">
           <h1 class="timer-clock">00:00,000</h1>
           <div class="timer-buttons">
@@ -71,7 +71,7 @@
           </div>
         </div>
       </section>
-      <section class="section-list container">
+      <section class="section-list">
         <ul class="steps-list"></ul>
         <div class="list-btns">
           <button type="button" class="reset-btn">Reset</button>
@@ -79,7 +79,6 @@
         </div>
       </section>
     </main>
-    <footer></footer>
     <div class="backdrop visually-hidden post-backdrop">
       <div class="loader-backdrop"></div>
     </div>
