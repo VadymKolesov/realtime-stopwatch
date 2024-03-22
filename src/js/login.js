@@ -16,30 +16,37 @@ async function onLogin(e) {
     return;
   }
 
-  const users = await getUsers();
-  const token = refs.loginInput.value;
+  try {
+    refs.loginBtn.innerHTML = `<div class="lds-ring"><div></div><div></div><div></div><div></div></div>`;
+    const users = await getUsers();
+    const token = refs.loginInput.value;
 
-  let isTokenTrue = false;
-  let userData;
+    let isTokenTrue = false;
+    let userData;
 
-  for (let user of users) {
-    if (user.token === token) {
-      isTokenTrue = true;
-      userData = user;
-      break;
+    for (let user of users) {
+      if (user.token === token) {
+        isTokenTrue = true;
+        userData = user;
+        break;
+      }
     }
-  }
 
-  if (!isTokenTrue) {
-    refs.loginInput.classList.add('login-input-required');
-    onErrorToast('Wrong token', '#');
-  } else {
-    refs.loginInput.classList.remove('login-input-required');
-    localStorage.setItem(
-      'log',
-      JSON.stringify({ ...userData, logIn: Date.now() })
-    );
-    const arr = location.pathname.split('/');
-    location.pathname = `/${arr[1]}`;
+    if (!isTokenTrue) {
+      refs.loginInput.classList.add('login-input-required');
+      onErrorToast('Wrong token', '#');
+    } else {
+      refs.loginInput.classList.remove('login-input-required');
+      localStorage.setItem(
+        'log',
+        JSON.stringify({ ...userData, logIn: Date.now() })
+      );
+      const arr = location.pathname.split('/');
+      location.pathname = `/${arr[1]}`;
+    }
+  } catch {
+    onErrorToast('Oops, something went wrong! Please, try again', '#');
+  } finally {
+    refs.loginBtn.innerHTML = 'Log in';
   }
 }
