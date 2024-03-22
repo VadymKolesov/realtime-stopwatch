@@ -54,6 +54,10 @@ export function onBack() {
   location.pathname = `/${arr[1]}`;
 }
 
+export function onReload() {
+  location.reload();
+}
+
 export function logOut() {
   localStorage.removeItem('log');
   const arr = location.pathname.split('/');
@@ -106,8 +110,17 @@ export async function setIndicatorBusy(id, user) {
     document.getElementById(
       id
     ).parentElement.parentElement.style.pointerEvents = 'none';
+    document
+      .getElementById(id)
+      .parentElement.parentElement.parentElement.classList.add('is-room-busy');
   }
   return;
+}
+
+export function clickOnBusyRoom(e) {
+  if (e.target.classList.contains('is-room-busy')) {
+    onErrorToast(`The room is busy, please try again later.`, '#');
+  }
 }
 
 export function removeIndicatorBusy(id) {

@@ -20,10 +20,13 @@ export const refs = {
   loginInput: document.querySelector('.login-input'),
   loginBtn: document.querySelector('.login-btn'),
   backBtn: document.querySelector('.back-btn'),
+  reloadBtn: document.querySelector('.reload-btn'),
   logOutBtn: document.querySelector('.log-out-btn'),
   username: document.querySelector('.username'),
   taskWrap: document.querySelector('.task-wrap'),
   taskForm: document.querySelector('.task-form'),
   taskFormDescription: document.querySelector('.task-description'),
   navName: document.querySelector('.nav-name'),
+  roomsList: document.querySelector('.rooms-list'),
+  roomItem: document.querySelector('.room-item'),
 };
