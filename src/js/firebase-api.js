@@ -6,8 +6,6 @@ import {
   getFirestore,
   setDoc,
   getDoc,
-  getDocs,
-  collection,
 } from 'firebase/firestore';
 import firebaseConfig from './firebase-config';
 import { db } from './database';

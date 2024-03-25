@@ -4,6 +4,7 @@ import { nanoid } from 'nanoid';
 import { checkLogin, getName, getTask, logOut, onBack } from './utilites';
 import editIcon from '../img/edit.svg';
 import { onErrorToast } from './utilites';
+import { sendValues } from './axios';
 
 checkLogin();
 checkTask();
@@ -28,6 +29,7 @@ refs.logOutBtn.addEventListener('click', logOut);
 refs.startBtn.addEventListener('click', onStart);
 refs.stopBtn.addEventListener('click', onStop);
 refs.stepsList.addEventListener('click', onDelete);
+refs.sendBtn.addEventListener('click', onSend);
 refs.resetBtn.addEventListener('click', onReset);
 refs.resetBackdrop.addEventListener('click', onDecideReset);
 refs.taskInput.addEventListener('input', () => {
@@ -158,4 +160,23 @@ function onEdit() {
   refs.taskForm.classList.remove('task-form-hidden');
   refs.username.innerHTML = `Hi ${getName()},`;
   refs.taskFormDescription.innerHTML = `Before you begin, please enter the name of the task in the box below and click on the "Save" button.`;
+}
+
+async function onSend() {
+  refs.sendBackdrop.classList.remove('visually-hidden');
+  const data = await FirebaseApi.getDefaultStepsList();
+
+  try {
+    const res = await fetch(
+      'https://script.google.com/macros/s/AKfycbwQfPNpDsZK7s3qT5Jt8PBS7B2YnK_ILFqPV65fPhuc7J9jd8vJYz4g8oSnoR0GqPSE/exec',
+      {
+        method: 'POST',
+        body: JSON.stringify(data.items),
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  } finally {
+    refs.sendBackdrop.classList.add('visually-hidden');
+  }
 }
