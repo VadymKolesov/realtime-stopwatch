@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <link rel="manifest" href="/realtime-stopwatch/manifest.json" />
     
     <meta
@@ -15,10 +14,10 @@
       href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" type="image/png" href="/realtime-stopwatch/timer.png" />
+    <link rel="icon" type="image/svg" href="/timer-icon.svg" />
     <meta name="theme-color" content="#171718" />
-    <title>Stopwatch</title>
-    <script type="module" crossorigin src="/realtime-stopwatch/commonHelpers.js"></script>
+    <title>Realtime Stopwatch</title>
+    <script type="module" crossorigin src="/realtime-stopwatch/commonHelpers5.js"></script>
     <link rel="modulepreload" crossorigin href="/realtime-stopwatch/assets/vendor-451a0b16.js">
     <link rel="modulepreload" crossorigin href="/realtime-stopwatch/assets/firebase-api-382ecb1f.js">
     <link rel="stylesheet" href="/realtime-stopwatch/assets/firebase-api-01b23fd0.css">
@@ -36,6 +35,7 @@
         </button>
       </nav>
       <div id="task" class="task-wrap">
+        <div class="edit-wrap"></div>
         <p class="username"></p>
         <p class="task-description">
           Before you begin, please enter the name of the task in the box below
@@ -52,32 +52,52 @@
         </form>
       </div>
     </header>
-    <main class="container">
-      <section class="section-timer">
+    <main>
+      <section class="section-timer container">
         <div class="timer-wrap">
           <h1 class="timer-clock">00:00,000</h1>
-          <div class="timer-buttons">
-            <button
-              type="button"
-              class="start-btn inactive-btn"
-              disabled="true"
-            >
-              Start
+          <div class="timer-buttons-wrap">
+            <div class="timer-buttons">
+              <button
+                type="button"
+                class="start-btn inactive-btn"
+                disabled="true"
+              >
+                Start
+              </button>
+              <button
+                type="button"
+                class="stop-btn inactive-btn"
+                disabled="true"
+              >
+                Stop
+              </button>
+            </div>
+            <button class="ready-content inactive-btn">
+              <div class="ready-btn">I'm ready</div>
+              <div class="loader-wrap hide-loader">
+                <div class="loader">
+                  <div
+                    class="justify-content-center jimu-primary-loading"
+                  ></div>
+                </div>
+              </div>
             </button>
-            <button type="button" class="stop-btn inactive-btn" disabled="true">
-              Stop
-            </button>
+            <div class="users-wrap">
+              <ul class="ready-users"></ul>
+            </div>
           </div>
         </div>
       </section>
-      <section class="section-list">
-        <ul class="steps-list"></ul>
+      <section class="section-list container">
         <div class="list-btns button-hidden">
           <button type="button" class="reset-btn">Reset</button>
           <button type="button" class="send-btn">Send</button>
         </div>
+        <ul class="steps-list"></ul>
       </section>
     </main>
+    <footer></footer>
     <div class="backdrop visually-hidden post-backdrop">
       <div class="loader-backdrop"></div>
     </div>

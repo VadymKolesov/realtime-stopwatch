@@ -16,11 +16,11 @@
     />
     <link rel="icon" type="image/png" href="/realtime-stopwatch/timer.png" />
     <meta name="theme-color" content="#171718" />
-    <title>Realtime Stopwatch - Lobby</title>
+    <title>Lobby</title>
     <script type="module" crossorigin src="/realtime-stopwatch/commonHelpers2.js"></script>
     <link rel="modulepreload" crossorigin href="/realtime-stopwatch/assets/vendor-451a0b16.js">
-    <link rel="modulepreload" crossorigin href="/realtime-stopwatch/assets/firebase-api-96c3fee1.js">
-    <link rel="stylesheet" href="/realtime-stopwatch/assets/firebase-api-3f2d7b43.css">
+    <link rel="modulepreload" crossorigin href="/realtime-stopwatch/assets/firebase-api-382ecb1f.js">
+    <link rel="stylesheet" href="/realtime-stopwatch/assets/firebase-api-01b23fd0.css">
     <link rel="stylesheet" href="/realtime-stopwatch/assets/vendor-cc075105.css">
   </head>
   <body>
@@ -47,7 +47,22 @@
           ></a>
         </li>
         <li class="room-item">
-          <a href="#" style="opacity: 0.2" class="room-link">Coming soon...</a>
+          <a href="./process-sw.html" class="room-link"
+            ><div>
+              <p class="lobby-watch-name">Processes Stop Watch</p>
+            </div>
+            <div class="indicator-wrap">
+              <div id="default_stopwatch_1" class="room-indicator"></div></div
+          ></a>
+        </li>
+        <li class="room-item">
+          <a href="./realtime-sw.html" class="room-link"
+            ><div>
+              <p class="lobby-watch-name">Realtime Stop Watch</p>
+            </div>
+            <div class="indicator-wrap">
+              <div id="default_stopwatch_1" class="room-indicator"></div></div
+          ></a>
         </li>
       </ul>
     </main>
