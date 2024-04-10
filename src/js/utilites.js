@@ -43,16 +43,16 @@ export function checkLogin() {
     Date.now() - JSON.parse(localStorage.getItem('log')).logIn > 86400000
   ) {
     localStorage.removeItem('log');
-    // const arr = location.pathname.split('/');
-    // location.pathname = `/${arr[1]}/login.html`;
-    location.pathname = `/login.html`;
+    const arr = location.pathname.split('/');
+    location.pathname = `/${arr[1]}/login.html`;
+    // location.pathname = `/login.html`;
   }
 }
 
 export function onBack() {
-  // const arr = location.pathname.split('/');
-  // location.pathname = `/${arr[1]}`;
-  location.pathname = `/`;
+  const arr = location.pathname.split('/');
+  location.pathname = `/${arr[1]}`;
+  // location.pathname = `/`;
 }
 
 export function onReload() {
@@ -61,9 +61,9 @@ export function onReload() {
 
 export function logOut() {
   localStorage.removeItem('log');
-  // const arr = location.pathname.split('/');
-  // location.pathname = `/${arr[1]}/login.html`;
-  location.pathname = `/login.html`;
+  const arr = location.pathname.split('/');
+  location.pathname = `/${arr[1]}/login.html`;
+  // location.pathname = `/login.html`;
 }
 
 export function getName() {

@@ -41,9 +41,9 @@ async function onLogin(e) {
         'log',
         JSON.stringify({ ...userData, logIn: Date.now() })
       );
-      // const arr = location.pathname.split('/');
-      // location.pathname = `/${arr[1]}`;
-      location.pathname = `/`;
+      const arr = location.pathname.split('/');
+      location.pathname = `/${arr[1]}`;
+      // location.pathname = `/`;
     }
   } catch {
     onErrorToast('Oops, something went wrong! Please, try again', '#');
