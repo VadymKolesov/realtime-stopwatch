@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1, user-scalable=no"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/png" href="/timer.png" />
+    <meta name="theme-color" content="#171718" />
+    <title>Process Stopwatch</title>
+  </head>
+  <body>
+    <header class="container">
+      <nav>
+        <button type="button" class="back-btn">
+          <img src="./img/arrow-left.svg" />
+        </button>
+        <p class="nav-name"></p>
+        <button type="button" class="show-list-btn">
+          <div class="total-quantity visually-hidden">
+            <p class="total-quantity-number">1</p>
+          </div>
+          <img src="./img/clipboard.svg" />
+        </button>
+      </nav>
+      <div id="task" class="task-wrap">
+        <div class="edit-wrap"></div>
+        <p class="username"></p>
+        <p class="task-description">
+          Before you begin, please enter the name of the task in the box below
+          and click on the "Save" button.
+        </p>
+
+        <form class="task-form">
+          <div class="process-list-wrap">
+            <input
+              class="task-input process-input"
+              type="text"
+              placeholder="Please, choose a process"
+            />
+            <ul class="process-list visually-hidden"></ul>
+          </div>
+          <button type="submit" class="save-btn active-btn">Save</button>
+        </form>
+      </div>
+    </header>
+    <main class="container">
+      <section class="section-timer">
+        <div class="timer-wrap">
+          <h1 class="timer-clock">00:00,000</h1>
+          <div class="timer-buttons process-buttons">
+            <div class="btns-wrap">
+              <button
+                type="button"
+                class="start-btn inactive-btn"
+                disabled="true"
+              >
+                Start
+              </button>
+              <button
+                type="button"
+                class="stop-btn inactive-btn"
+                disabled="true"
+              >
+                Reset
+              </button>
+            </div>
+            <button type="button" class="lap-btn inactive-btn" disabled="true">
+              New step
+            </button>
+          </div>
+        </div>
+      </section>
+      <section class="section-list processes-section-list">
+        <ul class="steps-list"></ul>
+        <div class="list-btns-processes" style="margin: 0">
+          <button
+            type="button"
+            class="send-btn button-hidden save-processes-btn"
+          >
+            Save
+          </button>
+        </div>
+      </section>
+    </main>
+    <div class="backdrop visually-hidden list-backdrop">
+      <div class="hide-list-btn-wrap">
+        <div style="width: 44px"></div>
+        <p>Total list</p>
+        <button type="button" class="hide-list-btn">
+          <img src="./img/x.svg" />
+        </button>
+      </div>
+      <ul class="total-list">
+        <li class="total-list-item">
+          <p class="total-list-title">Inventory Picking</p>
+          <ul class="total-list-tasks">
+            <li class="total-list-tasks-item">
+              <div class="total-task">
+                <p class="total-list-tasks-step">1.</p>
+                <p class="total-list-tasks-task">logowanie</p>
+              </div>
+              <p class="total-list-tasks-time">00:03,394</p>
+            </li>
+            <li class="total-list-tasks-item">
+              <div class="total-task">
+                <p class="total-list-tasks-step">2.</p>
+                <p class="total-list-tasks-task">scan</p>
+              </div>
+              <p class="total-list-tasks-time">00:01,994</p>
+            </li>
+            <li class="total-list-tasks-item">
+              <div class="total-task">
+                <p class="total-list-tasks-step">3.</p>
+                <p class="total-list-tasks-task">picking</p>
+              </div>
+              <p class="total-list-tasks-time">00:06,275</p>
+            </li>
+          </ul>
+          <button type="button" class="total-list-item-delete">Delete</button>
+        </li>
+        <li class="total-list-item">
+          <p class="total-list-title">Inventory Picking</p>
+          <ul class="total-list-tasks">
+            <li class="total-list-tasks-item">
+              <div class="total-task">
+                <p class="total-list-tasks-step">1.</p>
+                <p class="total-list-tasks-task">logowanie</p>
+              </div>
+              <p class="total-list-tasks-time">00:03,394</p>
+            </li>
+            <li class="total-list-tasks-item">
+              <div class="total-task">
+                <p class="total-list-tasks-step">2.</p>
+                <p class="total-list-tasks-task">scan</p>
+              </div>
+              <p class="total-list-tasks-time">00:01,994</p>
+            </li>
+            <li class="total-list-tasks-item">
+              <div class="total-task">
+                <p class="total-list-tasks-step">3.</p>
+                <p class="total-list-tasks-task">picking</p>
+              </div>
+              <p class="total-list-tasks-time">00:06,275</p>
+            </li>
+          </ul>
+          <button type="button" class="total-list-item-delete">Delete</button>
+        </li>
+      </ul>
+      <div class="send-btn-wrap"></div>
+    </div>
+    <div class="backdrop visually-hidden post-backdrop">
+      <div class="loader-backdrop"></div>
+    </div>
+    <div class="backdrop visually-hidden reset-backdrop">
+      <div class="reset-modal">
+        <p>Are you sure?</p>
+        <div>
+          <button type="button" class="no-btn">No</button>
+          <button type="button" class="yes-btn">Yes</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./js/process-sw.js"></script>
+  </body>
+</html>

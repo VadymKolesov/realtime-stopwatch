@@ -94,11 +94,42 @@ button {
   font-size: 48px;
   font-weight: 300;
   margin-bottom: 50px;
+  transition: color 100ms ease-in-out;
+}
+
+.push-watch {
+  color: rgb(226, 226, 226);
+}
+
+.timer-buttons-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .timer-buttons {
   display: flex;
   gap: 15px;
+}
+
+.process-buttons {
+  flex-direction: column;
+}
+
+.btns-wrap {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.btns-wrap > .start-btn,
+.btns-wrap > .stop-btn {
+  width: 100%;
+}
+
+.btns-wrap > .stop-btn.active-btn {
+  background-color: rgb(230, 14, 14);
 }
 
 .active-btn {
@@ -194,6 +225,7 @@ button {
   align-items: center;
   justify-content: center;
   gap: 20px;
+  padding: 20px 0;
 }
 
 /* LOADER */
@@ -346,10 +378,45 @@ button {
   overflow: hidden;
 }
 
+.step-item:last-child {
+  margin-bottom: 70px;
+}
+
 .step-item > div {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.process-list-item {
+  position: relative;
+  width: 100%;
+  background-color: var(--white);
+  padding: 30px 30px;
+  border-radius: 15px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  overflow: hidden;
+}
+
+.process-list-item:last-child {
+  margin-bottom: 120px;
+}
+
+.process-list-item > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.process-list-item .step-description {
+  text-align: end;
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.process-list-item .step-process {
+  font-weight: 500;
 }
 
 .step {
@@ -391,6 +458,22 @@ button {
 }
 
 .list-btns {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+  max-width: 350px;
+  overflow: hidden;
+  gap: 20px;
+  display: none;
+  width: 100%;
+}
+
+.list-btns-processes {
   display: flex;
   justify-content: center;
   margin-top: 40px;
@@ -404,11 +487,12 @@ button {
 .reset-btn {
   background-color: var(--white);
   color: var(--black);
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-shadow: rgba(3, 3, 4, 0.2) 0px 5px 25px;
 }
 
 .send-btn {
   background-color: var(--black);
+  box-shadow: rgba(3, 3, 4, 0.2) 0px 5px 25px;
 }
 
 .btns-list-visible {
@@ -422,7 +506,7 @@ button {
   top: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -578,6 +662,10 @@ button {
   padding: 20px 0;
 }
 
+.save-btn:active {
+  scale: 0.99;
+}
+
 /* NAVIGATION */
 
 header {
@@ -643,7 +731,6 @@ nav button {
 .room-item {
   background-color: var(--white);
   border-radius: 15px;
-
   width: 100%;
   display: flex;
   justify-content: center;
@@ -811,6 +898,13 @@ nav button {
     padding: 80px 40px 50px 40px;
   }
 
+  .timer-buttons-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
+
   .timer-buttons {
     flex-direction: column;
     width: 100%;
@@ -818,6 +912,14 @@ nav button {
 
   .timer-buttons button {
     padding: 30px 0;
+  }
+
+  .ready-content {
+    padding: 30px 0;
+  }
+
+  .process-list-item .step-time-item {
+    text-align: start;
   }
 
   .step-item {
@@ -871,8 +973,7 @@ nav button {
   }
 
   .list-btns {
-    flex-direction: column;
-    max-width: 100%;
+    width: 100%;
   }
 
   .list-btns button {
@@ -887,4 +988,196 @@ nav button {
   nav {
     padding: 30px 0;
   }
+}
+
+/* PROCESS */
+
+.lap-btn.active-btn:active {
+  background-color: #272728;
+  scale: 0.99;
+}
+
+.process-list-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.process-list {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  top: 73px;
+  width: 100%;
+  background-color: var(--white);
+  padding: 10px 0;
+  border-radius: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.process-item {
+  position: relative;
+  font-size: 14px;
+  padding: 20px 20px;
+  cursor: pointer;
+}
+
+.process-item:hover {
+  background-color: var(--smoke-gray);
+}
+
+.processes-section-list {
+  margin-bottom: 0;
+}
+
+.save-processes-btn {
+  margin: 0;
+  padding: 20px 100px;
+  max-width: 400px;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 25px;
+  box-shadow: rgba(3, 3, 4, 0.2) 0px 5px 25px;
+  transition: all 200ms ease-in-out;
+}
+
+.button-hidden {
+  pointer-events: none;
+  opacity: 0;
+  bottom: -70px;
+}
+
+/* TOTAL-LIST */
+
+.show-list-btn {
+  position: relative;
+}
+
+.total-quantity {
+  position: absolute;
+  content: '';
+  width: 15px;
+  height: 15px;
+  background-color: rgb(230, 14, 14);
+  top: -5px;
+  right: -5px;
+  border-radius: 50%;
+  color: var(--white);
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.list-backdrop {
+  position: absolute;
+  background-color: var(--smoke-gray);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  padding: 30px 15px 120px 15px;
+  gap: 30px;
+  overflow: scroll;
+}
+
+.hide-list-btn-wrap {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.hide-list-btn-wrap p {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.hide-list-btn {
+  padding: 10px;
+  background-color: var(--white);
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.total-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.empty-message {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+}
+
+.total-list-item {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  text-align: start;
+  width: 100%;
+  padding: 30px;
+  background-color: var(--white);
+  border-radius: 20px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.total-list-title {
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.total-list-tasks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.total-list-tasks-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.total-task {
+  display: flex;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.total-list-tasks-time {
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.total-list-item-delete {
+  background-color: rgb(230, 14, 14);
+  font-size: 16px;
+  padding: 15px;
+  transition: all 100ms ease-in-out;
+}
+
+.total-list-item-delete:active {
+  background-color: rgb(230, 62, 62);
+  scale: 0.99;
+}
+
+.send-btn-wrap {
+  position: fixed;
+  bottom: 30px;
+}
+
+.send-total-btn {
+  padding: 20px 100px;
+  box-shadow: rgba(3, 3, 4, 0.2) 0px 5px 25px;
+}
+
+.send-total-btn.active-btn {
+  animation: none;
 }

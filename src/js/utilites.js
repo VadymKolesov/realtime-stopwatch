@@ -1,7 +1,6 @@
 import warningIcon from '../img/warning.svg';
 import Toastify from 'toastify-js';
 import 'toastify-js/src/toastify.css';
-import { getIsBusy } from './firebase-api';
 
 export const convertMs = ms => {
   const sec = 1000;
@@ -15,7 +14,7 @@ export const convertMs = ms => {
   const secunds = Math.floor((((ms % day) % h) % min) / sec)
     .toString()
     .padStart(2, '0');
-  const milisecunds = ms.toString().substr(ms.toString().length - 3, 3);
+  const milisecunds = ms.toString().slice(-3);
 
   const result = {
     minutes,
@@ -44,14 +43,16 @@ export function checkLogin() {
     Date.now() - JSON.parse(localStorage.getItem('log')).logIn > 86400000
   ) {
     localStorage.removeItem('log');
-    const arr = location.pathname.split('/');
-    location.pathname = `/${arr[1]}/login.html`;
+    // const arr = location.pathname.split('/');
+    // location.pathname = `/${arr[1]}/login.html`;
+    location.pathname = `/login.html`;
   }
 }
 
 export function onBack() {
-  const arr = location.pathname.split('/');
-  location.pathname = `/${arr[1]}`;
+  // const arr = location.pathname.split('/');
+  // location.pathname = `/${arr[1]}`;
+  location.pathname = `/`;
 }
 
 export function onReload() {
@@ -60,8 +61,9 @@ export function onReload() {
 
 export function logOut() {
   localStorage.removeItem('log');
-  const arr = location.pathname.split('/');
-  location.pathname = `/${arr[1]}/login.html`;
+  // const arr = location.pathname.split('/');
+  // location.pathname = `/${arr[1]}/login.html`;
+  location.pathname = `/login.html`;
 }
 
 export function getName() {
@@ -73,6 +75,11 @@ export function getName() {
 export function getTask() {
   const task = localStorage.getItem('task');
   return task;
+}
+
+export function getProcess() {
+  const process = JSON.parse(localStorage.getItem('process'));
+  return process;
 }
 
 export function onErrorToast(message, link) {
@@ -132,4 +139,11 @@ export function removeIndicatorBusy(id) {
     ).parentElement.parentElement.style.pointerEvents = 'all';
   }
   return;
+}
+
+let timer;
+
+export function debounce(func, timeout) {
+  clearTimeout(timer);
+  timer = setTimeout(func, timeout);
 }

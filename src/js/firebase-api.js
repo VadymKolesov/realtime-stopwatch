@@ -9,7 +9,7 @@ import {
 } from 'firebase/firestore';
 import firebaseConfig from './firebase-config';
 import { db } from './database';
-import { manageBtns, manageBtnsDefault } from './manage-btns';
+import { manageBtns, manageBtnsDefault, checkLine } from './manage-btns';
 import { manageWatchInterval } from './watch';
 import { showUsers } from './manage-users';
 import { renderStepsList } from './render-steps-list';
@@ -41,6 +41,16 @@ export async function checkList() {
   const db = getFirestore(app);
   onSnapshot(doc(db, 'list', 'Oi4nFSVsaGY2GQtak5IO'), doc => {
     const data = doc.data().items.reverse();
+    renderStepsList(data);
+  });
+}
+
+export async function checkCurrentLine() {
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+  onSnapshot(doc(db, 'realtimeLines', 'current'), doc => {
+    const data = doc.data().currentLine;
+    checkLine(data);
   });
 }
 
@@ -61,9 +71,21 @@ export async function getData() {
   return data.data();
 }
 
+export async function getCurrentLine() {
+  const docRef = doc(db, 'realtimeLines', 'current');
+  const data = await getDoc(docRef);
+  return data.data().currentLine;
+}
+
 export async function setData(data) {
   const docRef = await setDoc(doc(db, 'data', 'GKpJfJAhEovC4aEqzc9C'), {
     ...data,
+  });
+}
+
+export async function setCurrentLine(line) {
+  const docRef = await setDoc(doc(db, 'realtimeLines', 'current'), {
+    currentLine: line,
   });
 }
 
@@ -77,6 +99,30 @@ export async function addStepToList(data) {
   const prevList = await getStepsList();
   setDoc(doc(db, 'list', 'Oi4nFSVsaGY2GQtak5IO'), {
     items: [...prevList.items, data],
+  });
+}
+
+export async function resetStepList() {
+  const prevList = await getStepsList();
+  setDoc(doc(db, 'list', 'Oi4nFSVsaGY2GQtak5IO'), {
+    items: [],
+  });
+}
+
+export async function deleteStepById(id) {
+  const prevList = await getStepsList();
+  const newList = prevList.items.filter(el => el.id !== id);
+
+  for (let i = 0; i < newList.length; i++) {
+    if (i === 0) {
+      newList.step === 1;
+    }
+
+    newList[i].step = i + 1;
+  }
+
+  setDoc(doc(db, 'list', 'Oi4nFSVsaGY2GQtak5IO'), {
+    items: newList,
   });
 }
 
@@ -196,4 +242,10 @@ export async function checkUser(docName) {
   }
 
   return;
+}
+
+export async function getProcesses() {
+  const docRef = doc(db, 'processes', 'processes-m13');
+  const data = await getDoc(docRef);
+  return data.data().items;
 }

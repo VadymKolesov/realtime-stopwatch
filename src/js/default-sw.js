@@ -4,13 +4,15 @@ import { nanoid } from 'nanoid';
 import { checkLogin, getName, getTask, logOut, onBack } from './utilites';
 import editIcon from '../img/edit.svg';
 import { onErrorToast } from './utilites';
-import { sendValues } from './axios';
 
 checkLogin();
 checkTask();
 
 FirebaseApi.checkIsBusy('default_stopwatch_1');
 FirebaseApi.checkUser('default_stopwatch_1');
+
+const listPosition = refs.stepsList.getBoundingClientRect().top;
+const windowInnerHeight = window.innerHeight;
 
 setInterval(() => {
   const user = JSON.parse(localStorage.getItem('log')).user;
@@ -32,6 +34,7 @@ refs.stepsList.addEventListener('click', onDelete);
 refs.sendBtn.addEventListener('click', onSend);
 refs.resetBtn.addEventListener('click', onReset);
 refs.resetBackdrop.addEventListener('click', onDecideReset);
+document.addEventListener('scroll', showBtnsList);
 refs.taskInput.addEventListener('input', () => {
   refs.taskInput.classList.remove('task-input-required');
 });
@@ -87,6 +90,16 @@ async function onStop() {
     isStart: false,
     stop: stopDate,
   });
+}
+
+function showBtnsList() {
+  const windowScrollHeight = window.scrollY;
+
+  if (refs.listBtns && windowScrollHeight >= listPosition - windowInnerHeight) {
+    refs.listBtns.classList.remove('button-hidden');
+  } else {
+    refs.listBtns.classList.add('button-hidden');
+  }
 }
 
 async function onDelete(e) {
@@ -165,18 +178,22 @@ function onEdit() {
 async function onSend() {
   refs.sendBackdrop.classList.remove('visually-hidden');
   const data = await FirebaseApi.getDefaultStepsList();
+  data.type = 'default-stop-watch';
+
+  refs.listBtns.classList.add('button-hidden');
 
   try {
     const res = await fetch(
       'https://script.google.com/macros/s/AKfycbwQfPNpDsZK7s3qT5Jt8PBS7B2YnK_ILFqPV65fPhuc7J9jd8vJYz4g8oSnoR0GqPSE/exec',
       {
         method: 'POST',
-        body: JSON.stringify(data.items),
+        body: JSON.stringify(data),
       }
     );
-  } catch (error) {
-    console.log(error);
+  } catch {
+    onErrorToast('Oops. Something went wrong.', '#');
   } finally {
+    refs.listBtns.classList.remove('button-hidden');
     refs.sendBackdrop.classList.add('visually-hidden');
   }
 }
