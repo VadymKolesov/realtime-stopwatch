@@ -2,7 +2,7 @@ import { refs } from './js/refs';
 import { checkLogin, clickOnBusyRoom, logOut, onReload } from './js/utilites';
 import { checkIsBusy } from './js/firebase-api';
 
-checkIsBusy('default_stopwatch_1');
+// checkIsBusy('default_stopwatch_1');
 checkLogin();
 
 refs.reloadBtn.addEventListener('click', onReload);
