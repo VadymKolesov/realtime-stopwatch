@@ -1,6 +1,8 @@
 export const refs = {
   readyBtn: document.querySelector('.ready-content'),
   startBtn: document.querySelector('.start-btn'),
+  pauseBtn: document.querySelector('.pause-btn'),
+  resumeBtn: document.querySelector('.resume-btn'),
   lapBtn: document.querySelector('.lap-btn'),
   stopBtn: document.querySelector('.stop-btn'),
   watch: document.querySelector('.timer-clock'),

@@ -40,6 +40,8 @@ refs.processInput.addEventListener('input', () =>
 refs.processList.addEventListener('click', onChooseProcessItem);
 refs.taskForm.addEventListener('submit', onSaveTask);
 refs.startBtn.addEventListener('click', onStart);
+refs.pauseBtn.addEventListener('click', onPause);
+refs.resumeBtn.addEventListener('click', onResume);
 refs.lapBtn.addEventListener('click', onNewStep);
 refs.stopBtn.addEventListener('click', onStop);
 refs.sendBtn.addEventListener('click', onSave);
@@ -147,21 +149,33 @@ function checkProcess() {
   document.querySelector('.edit-btn').disabled = true;
   document.querySelector('.edit-btn').style.visibility = 'hidden';
 
-  if (process.startDate && !timerInterval) {
+  if (process.startDate && !timerInterval && !process.onPause) {
     timerInterval = setInterval(() => {
       const currentTime = Date.now() - process.startDate;
       renderWatch(currentTime);
     }, 10);
 
+    enableBtn(refs.pauseBtn);
     disableBtn(refs.startBtn);
     enableBtn(refs.lapBtn);
     enableBtn(refs.stopBtn);
   } else if (!process.startDate) {
+    disableBtn(refs.pauseBtn);
     disableBtn(refs.lapBtn);
     disableBtn(refs.stopBtn);
     enableBtn(refs.startBtn);
     document.querySelector('.edit-btn').disabled = false;
     document.querySelector('.edit-btn').style.visibility = 'visible';
+  }
+
+  if (process.onPause) {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    enableBtn(refs.resumeBtn);
+    disableBtn(refs.pauseBtn);
+    disableBtn(refs.stopBtn);
+    disableBtn(refs.startBtn);
+    disableBtn(refs.lapBtn);
   }
 
   refs.taskForm.classList.add('task-form-hidden');
@@ -187,6 +201,8 @@ function checkProcess() {
       .classList.add('btns-list-visible');
 
     disableBtn(refs.startBtn);
+    disableBtn(refs.pauseBtn);
+    disableBtn(refs.resumeBtn);
     disableBtn(refs.lapBtn);
     enableBtn(refs.stopBtn);
   }
@@ -208,9 +224,47 @@ function onStart() {
     return;
   }
 
+  process.onPause = false;
+
   const startDate = Date.now();
   process.startDate = startDate;
   localStorage.setItem('process', JSON.stringify(process));
+
+  checkProcess();
+}
+
+function onPause() {
+  const process = JSON.parse(localStorage.getItem('process'));
+
+  process.onPause = true;
+
+  const pauseTime = Date.now();
+  process.pauseDate = pauseTime;
+
+  localStorage.setItem('process', JSON.stringify(process));
+
+  checkProcess();
+}
+
+function onResume() {
+  const process = JSON.parse(localStorage.getItem('process'));
+
+  const startTime = process.startDate;
+  const pauseTime = process.pauseDate;
+  const currentTime = Date.now();
+  const resumeTime = currentTime - (pauseTime - startTime);
+
+  process.startDate = resumeTime;
+  process.onPause = false;
+
+  delete process.pauseDate;
+
+  localStorage.setItem('process', JSON.stringify(process));
+
+  disableBtn(refs.resumeBtn);
+  enableBtn(refs.pauseBtn);
+  enableBtn(refs.stopBtn);
+  enableBtn(refs.lapBtn);
 
   checkProcess();
 }
@@ -219,6 +273,8 @@ function onNewStep() {
   const process = JSON.parse(localStorage.getItem('process'));
   const savedProcesses = JSON.parse(localStorage.getItem('processes'));
   const log = JSON.parse(localStorage.getItem('log'));
+
+  process.onPause = false;
 
   refs.watch.classList.add('push-watch');
   setTimeout(() => {
@@ -251,6 +307,8 @@ function onNewStep() {
 
 function onStop() {
   const process = JSON.parse(localStorage.getItem('process'));
+
+  process.onPause = false;
 
   delete process.startDate;
   localStorage.setItem('process', JSON.stringify(process));
