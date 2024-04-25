@@ -248,11 +248,19 @@ function onPause() {
 
 function onResume() {
   const process = JSON.parse(localStorage.getItem('process'));
+  const savedProcesses = JSON.parse(localStorage.getItem('processes'));
+  const stepIndex = savedProcesses.length;
 
   const startTime = process.startDate;
   const pauseTime = process.pauseDate;
   const currentTime = Date.now();
   const resumeTime = currentTime - (pauseTime - startTime);
+
+  if (stepIndex > 0) {
+    const diffrenceTime = currentTime - pauseTime;
+    savedProcesses[stepIndex - 1].currentTime += diffrenceTime;
+    localStorage.setItem('processes', JSON.stringify(savedProcesses));
+  }
 
   process.startDate = resumeTime;
   process.onPause = false;
