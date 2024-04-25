@@ -8,8 +8,8 @@ import { onErrorToast } from './utilites';
 checkLogin();
 checkTask();
 
-FirebaseApi.checkIsBusy('default_stopwatch_1');
-FirebaseApi.checkUser('default_stopwatch_1');
+// FirebaseApi.checkIsBusy('default_stopwatch_1');
+// FirebaseApi.checkUser('default_stopwatch_1');
 
 const listPosition = refs.stepsList.getBoundingClientRect().top;
 const windowInnerHeight = window.innerHeight;
